@@ -17,6 +17,7 @@ Open the `.ly` and `.pdf` files side-by-side in VSCode. Make sure that the PDF p
 Each time the `.ly` file is saved, the `.pdf` will be refreshed. Changes should display automatically.
 
 ## References
-
+- [LilyPond Cheat Sheet](https://lilypond.org/doc/v2.24/Documentation/notation/cheat-sheet)
 - [LilyPond Notation Reference](https://lilypond.org/doc/v2.24/Documentation/notation/index.html)
+- [LilyPond Command Line Usage](https://lilypond.org/doc/v2.23/Documentation/usage/command_002dline-usage#basic-command-line-options-for-lilypond)
 - [Mutopia](https://www.mutopiaproject.org/index.html)
