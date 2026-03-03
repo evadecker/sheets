@@ -1,7 +1,7 @@
-import type { Loader } from "astro/loaders";
-import { fileURLToPath } from "node:url";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import type { Loader } from "astro/loaders";
 
 const TITLE_REGEX = /title\s*=\s*"([^"]+)"/;
 
@@ -47,8 +47,7 @@ export function sheetsLoader(): Loader {
 
           const pngFiles = files
             .filter(
-              (f) =>
-                f.startsWith(`${baseName}-page`) && f.endsWith(".png")
+              (f) => f.startsWith(`${baseName}-page`) && f.endsWith(".png"),
             )
             .sort((a, b) => {
               const numA = parseInt(a.match(/-page(\d+)/)?.[1] ?? "0", 10);
