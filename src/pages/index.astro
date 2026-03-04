@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "~/layouts/BaseLayout.astro";
 import SheetCard from "~/components/SheetCard.astro";
 import SiteHeader from "~/components/SiteHeader.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
 
 const sheets = await getCollection("sheets");
 ---
