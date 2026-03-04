@@ -1,0 +1,38 @@
+---
+export interface Props {
+  showBack?: boolean;
+}
+
+const { showBack = false } = Astro.props;
+---
+
+<header class="site-header">
+  {
+    showBack && (
+      <p class="back-link">
+        <a href="/">← All sheets</a>
+      </p>
+    )
+  }
+  <h1>Sheets</h1>
+  <p>
+    Solo piano arrangements by <a href="https://eva.town">Eva Decker</a>,
+    engraved using <a href="https://lilypond.org/">LilyPond</a>. Source
+    available on <a href="https://github.com/evadecker/sheets">GitHub</a>. :)
+  </p>
+</header>
+
+<style>
+  .site-header {
+    padding: 2rem;
+    padding-bottom: 0;
+  }
+
+  .back-link {
+    margin-bottom: 1rem;
+  }
+
+  .back-link a {
+    color: inherit;
+  }
+</style>

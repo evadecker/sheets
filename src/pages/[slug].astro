@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import SheetCard from "~/components/SheetCard.astro";
+import SiteHeader from "~/components/SiteHeader.astro";
+
+export async function getStaticPaths() {
+  const sheets = await getCollection("sheets");
+  return sheets.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+if (!entry) {
+  return Astro.redirect("/");
+}
+---
+
+<BaseLayout
+  title={`${entry.data.title}: Piano arrangement by Eva Decker`}
+  description="View and download sheets."
+  image={entry.data.pngUrls[0]
+    ? {
+        src: new URL(entry.data.pngUrls[0], Astro.site).toString(),
+        alt: `${entry.data.title} — sheet music preview`,
+      }
+    : undefined}
+>
+  <main>
+    <SiteHeader showBack />
+    <SheetCard
+      title={entry.data.title}
+      pdfUrl={entry.data.pdfUrl}
+      pngUrls={entry.data.pngUrls}
+    />
+  </main>
+</BaseLayout>

@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import SheetCard from "~/components/SheetCard.astro";
+import SiteHeader from "~/components/SiteHeader.astro";
 
 const sheets = await getCollection("sheets");
 ---
@@ -14,38 +16,17 @@ const sheets = await getCollection("sheets");
   }}
 >
   <main>
-    <header>
-      <h1>Sheets</h1>
-      <p>
-        Solo piano arrangements by <a href="https://eva.town">Eva Decker</a>,
-        engraved using <a href="https://lilypond.org/">LilyPond</a>. Source
-        available on <a href="https://github.com/evadecker/sheets">GitHub</a>.
-        :)
-      </p>
-    </header>
+    <SiteHeader />
     <ul class="sheet-list">
       {
         sheets.map((entry) => (
           <li>
-            <article class="sheet">
-              <header>
-                <h2>{entry.data.title}</h2>
-                <a href={entry.data.pdfUrl} download>
-                  Download PDF
-                </a>
-              </header>
-              {entry.data.pngUrls.length > 0 && (
-                <div class="carousel">
-                  {entry.data.pngUrls.map((url: string, i: number) => (
-                    <img
-                      src={url}
-                      alt={`${entry.data.title} — page ${i + 1}`}
-                      class="carousel-image"
-                    />
-                  ))}
-                </div>
-              )}
-            </article>
+            <SheetCard
+              title={entry.data.title}
+              pdfUrl={entry.data.pdfUrl}
+              pngUrls={entry.data.pngUrls}
+              slug={entry.data.slug}
+            />
           </li>
         ))
       }
@@ -54,32 +35,11 @@ const sheets = await getCollection("sheets");
 </BaseLayout>
 
 <style>
-  header {
-    padding: 2rem;
-    padding-bottom: 0;
-  }
-
   .sheet-list {
     list-style: none;
     padding: 0;
     display: flex;
     flex-direction: column;
     gap: 0;
-  }
-
-  .carousel {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 2rem;
-  }
-
-  .carousel-image {
-    flex-shrink: 0;
-    width: auto;
-    max-height: 60vh;
-    object-fit: contain;
   }
 </style>
